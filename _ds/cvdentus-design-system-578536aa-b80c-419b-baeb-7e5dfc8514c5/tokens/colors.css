@@ -1,0 +1,68 @@
+/* ============================================================
+   CVDentus — Color tokens
+   Sourced from "Manual da Marca" (15 anos / cvdentus.com.br).
+   The group is built on a deep institutional blue; each of the
+   five niches carries its own accent. CVD Dentus, CVD Vale and
+   CVD Coating are the active brands.
+   ============================================================ */
+:root {
+  /* ---- Brand blue family (group / cvdentus) ---- */
+  --cvd-blue-deep:   #004A91; /* Pantone 2945C — institutional base   */
+  --cvd-blue:        #224585; /* logo lockup navy                     */
+  --cvd-blue-bright: #2E7DB9; /* Pantone 7689C — cvdentus accent      */
+  --cvd-blue-700:    #1C5A99;
+  --cvd-blue-300:    #7FB0D6;
+  --cvd-blue-100:    #DDEAF5;
+  --cvd-blue-050:    #EEF4FA;
+
+  /* ---- CVDentus accent ---- */
+  --cvd-entus:       #2E7DB9; /* dental — bright blue / Pantone 7689C */
+
+  /* ---- Neutrals (cool-leaning to harmonize with the slate) ---- */
+  --cvd-ink:      #16202B;  /* near-black — wordmark "entus", body text */
+  --cvd-gray-900: #1F2A36;
+  --cvd-gray-800: #2D3A48;
+  --cvd-gray-700: #44535F;
+  --cvd-gray-600: #5C6B78;
+  --cvd-gray-500: #7A8893;
+  --cvd-gray-400: #9CA8B2;
+  --cvd-gray-300: #C2CBD2;
+  --cvd-gray-200: #DCE2E7;
+  --cvd-gray-100: #EDF0F3;
+  --cvd-gray-050: #F6F8F9;
+  --cvd-white:    #FFFFFF;
+
+  /* ---- Semantic (mapped to brand niche colors) ---- */
+  --color-success: #1A8A4A;
+  --color-warning: #C97B2A;
+  --color-danger:  #C0272D;
+  --color-info:    var(--cvd-blue-bright);
+  --color-success-soft: #E3F4EA;
+  --color-warning-soft: #FBEDE1;
+  --color-danger-soft:  #F8E3E4;
+  --color-info-soft:    #E2EFF8;
+
+  /* ---- Semantic aliases ---- */
+  --color-primary:        var(--cvd-blue-deep);
+  --color-primary-hover:  #013C77;
+  --color-primary-active: #002E5C;
+  --color-accent:         var(--cvd-blue-bright);
+
+  --text-strong:    var(--cvd-ink);
+  --text-body:      var(--cvd-gray-800);
+  --text-muted:     var(--cvd-gray-600);
+  --text-subtle:    var(--cvd-gray-500);
+  --text-on-brand:  var(--cvd-white);
+  --text-link:      var(--cvd-blue-deep);
+
+  --surface-page:   var(--cvd-gray-050);
+  --surface-card:   var(--cvd-white);
+  --surface-sunken: var(--cvd-gray-100);
+  --surface-brand:  var(--cvd-blue-deep);
+  --surface-brand-bright: var(--cvd-blue-bright);
+
+  --border-subtle:  var(--cvd-gray-200);
+  --border-default: var(--cvd-gray-300);
+  --border-strong:  var(--cvd-gray-400);
+  --focus-ring:     var(--cvd-blue-bright);
+}
