@@ -26,7 +26,7 @@
   @keyframes cvdFadeUp { 0% { opacity: 0; transform: translateY(18px); } 100% { opacity: 1; transform: translateY(0); } }
   @keyframes cvdDrift { 0% { background-position: 0 0, 0 0; } 100% { background-position: 240px 240px, -240px 240px; } }
   @keyframes cvdGlow { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.85; } }
-  @media (max-width: 640px) { .cvd-photo-grid { grid-template-columns: 1fr !important; } }
+  @media (max-width: 640px) { .cvd-photo-grid { grid-template-columns: 1fr !important; } .cvd-hero-video { object-position: 70% center !important; } }
 </style>
 </head>
 <body>
@@ -40,7 +40,7 @@
 
   <div id="cvd-hero" style="position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;">
     <div style="position: absolute; inset: 0; overflow: hidden; z-index: 0;">
-      <video class="cvd-parallax-video" src="uploads/Woman_with_moving_hair_1080p_202607201433.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 130%; object-fit: cover; will-change: transform;"></video>
+      <video class="cvd-parallax-video cvd-hero-video" src="uploads/Woman_with_moving_hair_1080p_202607201433.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 130%; object-fit: cover; will-change: transform;"></video>
       <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.65) 65%, #000000 100%);"></div>
     </div>
 
