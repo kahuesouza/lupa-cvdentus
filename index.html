@@ -27,6 +27,21 @@
   @keyframes cvdDrift { 0% { background-position: 0 0, 0 0; } 100% { background-position: 240px 240px, -240px 240px; } }
   @keyframes cvdGlow { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.85; } }
   @media (max-width: 640px) { .cvd-photo-grid { grid-template-columns: 1fr !important; } .cvd-hero-video { object-position: 30% 20% !important; } }
+
+  .cvd-carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; }
+  .cvd-carousel-track::-webkit-scrollbar { display: none; }
+  .cvd-carousel-track.cvd-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+  .cvd-carousel-slide { flex: 0 0 100%; max-width: 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+  .cvd-carousel-arrow { position: absolute; top: max(35vh, 230px); transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity 0.15s cubic-bezier(0.2,0,0.1,1), background 0.15s cubic-bezier(0.2,0,0.1,1); z-index: 3; backdrop-filter: blur(6px); padding: 0; }
+  .cvd-carousel-arrow:hover { background: rgba(0,0,0,0.75); }
+  .cvd-carousel-arrow svg { width: 20px; height: 20px; fill: none; stroke: #ffffff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .cvd-carousel-prev { left: 20px; }
+  .cvd-carousel-next { right: 20px; }
+  .cvd-carousel-dots { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 22px 0 0; }
+  .cvd-carousel-dot { height: 8px; width: 8px; padding: 0; border: none; border-radius: 999px; background: rgba(255,255,255,0.3); cursor: pointer; transition: width 0.25s cubic-bezier(0.2,0,0.1,1), background 0.25s cubic-bezier(0.2,0,0.1,1); }
+  .cvd-carousel-dot:hover { background: rgba(255,255,255,0.55); }
+  .cvd-carousel-dot.is-active { width: 22px; background: #ffffff; }
+  @media (max-width: 640px) { .cvd-carousel-arrow { width: 40px; height: 40px; } .cvd-carousel-arrow svg { width: 17px; height: 17px; } .cvd-carousel-prev { left: 12px; } .cvd-carousel-next { right: 12px; } }
 </style>
 </head>
 <body>
@@ -72,8 +87,11 @@
         <h2 style="font-size: 44px; font-weight: 500; color: #ffffff; margin: 0; letter-spacing: -0.01em;">Modelos Flip</h2>
       </div>
 
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      <div class="cvd-carousel" style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
+        <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw);">
+          <div class="cvd-carousel-track">
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/ERGO_FLIP_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -88,9 +106,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/ERGO_FLIP_04.jpeg" alt="Ergo" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/KEPLER_FLIP_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -105,9 +123,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/KEPLER_FLIP_03.jpeg" alt="Kepler" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/GALILEU_FLIP_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -122,13 +140,27 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/GALILEU_FLIP_04.jpeg" alt="Galileu" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <div id="ttl" style="max-width: 1040px; margin: 0 auto; padding: 140px 32px 0; position: relative; z-index: 1; scroll-margin-top: 24px;">
+      </div>
+      
+          </div>
+          <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+          <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+        <div class="cvd-carousel-dots">
+            <button class="cvd-carousel-dot" data-index="0" aria-label="Modelo 1"></button>
+            <button class="cvd-carousel-dot" data-index="1" aria-label="Modelo 2"></button>
+            <button class="cvd-carousel-dot" data-index="2" aria-label="Modelo 3"></button>
+        </div>
+      </div>
+<div id="ttl" style="max-width: 1040px; margin: 0 auto; padding: 140px 32px 0; position: relative; z-index: 1; scroll-margin-top: 24px;">
         <h2 style="font-size: 44px; font-weight: 500; color: #ffffff; margin: 0; letter-spacing: -0.01em;">Modelos TTL</h2>
       </div>
 
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      <div class="cvd-carousel" style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
+        <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw);">
+          <div class="cvd-carousel-track">
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/ERGO_TTL_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -143,9 +175,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/ERGO_03.jpeg" alt="Ergo" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/KEPLER_TTL_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -160,9 +192,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/Treatment_on_lighting_only_202607171624.jpeg" alt="Kepler" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/GALILEU_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -177,13 +209,27 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/GALILEU_03.jpeg" alt="Galileu" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <div id="fotoforos" style="max-width: 1040px; margin: 0 auto; padding: 140px 32px 0; position: relative; z-index: 1; scroll-margin-top: 24px;">
+      </div>
+      
+          </div>
+          <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+          <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+        <div class="cvd-carousel-dots">
+            <button class="cvd-carousel-dot" data-index="0" aria-label="Modelo 1"></button>
+            <button class="cvd-carousel-dot" data-index="1" aria-label="Modelo 2"></button>
+            <button class="cvd-carousel-dot" data-index="2" aria-label="Modelo 3"></button>
+        </div>
+      </div>
+<div id="fotoforos" style="max-width: 1040px; margin: 0 auto; padding: 140px 32px 0; position: relative; z-index: 1; scroll-margin-top: 24px;">
         <h2 style="font-size: 44px; font-weight: 500; color: #ffffff; margin: 0; letter-spacing: -0.01em;">Fotóforos</h2>
       </div>
 
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      <div class="cvd-carousel" style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
+        <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw);">
+          <div class="cvd-carousel-track">
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/JC-M06-B_01.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -197,9 +243,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/JC-M06-B_02.png" alt="JC-M06-B Kit Starter" style="display: block; width: 100%; aspect-ratio: 1 / 1; height: auto; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/JC-M06-C_02.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 62%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -213,9 +259,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/JC-M06-C_02.png" alt="JC-M06-C Kit Intermediário" style="display: block; width: 100%; aspect-ratio: 1 / 1; height: auto; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/JG-M06C.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -229,9 +275,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/JG-M06C_02.png" alt="JG-M06C" style="display: block; width: 100%; aspect-ratio: 1 / 1; height: auto; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/JG-M07C.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -245,14 +291,29 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/JG-M07C_02.png" alt="JG-M07C" style="display: block; width: 100%; aspect-ratio: 1 / 1; height: auto; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <div id="armacoes" style="max-width: 1040px; margin: 0 auto; padding: 140px 32px 0; position: relative; z-index: 1; scroll-margin-top: 24px;">
+      
+          </div>
+          <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+          <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+        <div class="cvd-carousel-dots">
+            <button class="cvd-carousel-dot" data-index="0" aria-label="Modelo 1"></button>
+            <button class="cvd-carousel-dot" data-index="1" aria-label="Modelo 2"></button>
+            <button class="cvd-carousel-dot" data-index="2" aria-label="Modelo 3"></button>
+            <button class="cvd-carousel-dot" data-index="3" aria-label="Modelo 4"></button>
+        </div>
+      </div>
+<div id="armacoes" style="max-width: 1040px; margin: 0 auto; padding: 140px 32px 0; position: relative; z-index: 1; scroll-margin-top: 24px;">
         <h2 style="font-size: 44px; font-weight: 500; color: #ffffff; margin: 0; letter-spacing: -0.01em;">Armações</h2>
       </div>
 
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      <div class="cvd-carousel" style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
+        <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw);">
+          <div class="cvd-carousel-track">
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/J04_BLACK_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -267,9 +328,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/J04_BLACK_03.jpeg" alt="J04 Black" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/J04_SILVER_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -284,9 +345,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/J04_SILVER_03.jpeg" alt="J04 Silver" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/J22_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -301,9 +362,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/J22_03.jpeg" alt="J22" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/J23_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -318,9 +379,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/J23_03.jpeg" alt="J23" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/J24_BLACK_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -335,9 +396,9 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/J24_BLACK_03.jpeg" alt="J24 Black" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
-      <section style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
-          <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw); height: 70vh; min-height: 460px; overflow: hidden;">
+      </div>
+      <div class="cvd-carousel-slide">
+          <div style="position: relative; width: 100%; height: 70vh; min-height: 460px; overflow: hidden;">
             <video class="cvd-parallax-video" src="uploads/J24_SILVER_360.mp4" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 115%; object-fit: cover; object-position: center 30%; will-change: transform;"></video>
             <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 70%, #000000 100%);"></div>
             <div class="cvd-reveal" style="position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; max-width: 1040px; margin: 0 auto; padding: 0 32px 40px; box-sizing: border-box; opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.2,0,0.1,1), transform 0.7s cubic-bezier(0.2,0,0.1,1);">
@@ -352,7 +413,20 @@
               <div class="photo-card" style="border-radius: 20px; overflow: hidden; border: 1px solid #333333; background: #111111; transition: border-color 0.15s cubic-bezier(0.2,0,0.1,1);"><img src="uploads/J24_SILVER_03.jpeg" alt="J24 Silver" style="display: block; width: 100%; height: 260px; object-fit: cover;"></div>
           </div>
         </div>
-      </section>
+      </div>
+          </div>
+          <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+          <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+        <div class="cvd-carousel-dots">
+            <button class="cvd-carousel-dot" data-index="0" aria-label="Modelo 1"></button>
+            <button class="cvd-carousel-dot" data-index="1" aria-label="Modelo 2"></button>
+            <button class="cvd-carousel-dot" data-index="2" aria-label="Modelo 3"></button>
+            <button class="cvd-carousel-dot" data-index="3" aria-label="Modelo 4"></button>
+            <button class="cvd-carousel-dot" data-index="4" aria-label="Modelo 5"></button>
+            <button class="cvd-carousel-dot" data-index="5" aria-label="Modelo 6"></button>
+        </div>
+      </div>
 </div>
 
 <script>
@@ -390,6 +464,74 @@
   }
   scanReveal();
   setInterval(scanReveal, 400);
+
+  function initCarousels() {
+    document.querySelectorAll('.cvd-carousel').forEach(function (carousel) {
+      if (carousel.dataset.cvdInit) return;
+      carousel.dataset.cvdInit = '1';
+
+      var track = carousel.querySelector('.cvd-carousel-track');
+      var slides = Array.prototype.slice.call(track.children);
+      var dots = Array.prototype.slice.call(carousel.querySelectorAll('.cvd-carousel-dot'));
+      var prevBtn = carousel.querySelector('.cvd-carousel-prev');
+      var nextBtn = carousel.querySelector('.cvd-carousel-next');
+
+      if (slides.length <= 1) {
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+        var dotsWrap = carousel.querySelector('.cvd-carousel-dots');
+        if (dotsWrap) dotsWrap.style.display = 'none';
+      }
+
+      function currentIndex() {
+        var w = track.clientWidth || 1;
+        return Math.round(track.scrollLeft / w);
+      }
+      function goTo(i) {
+        i = Math.max(0, Math.min(slides.length - 1, i));
+        track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+      }
+      function updateActive() {
+        var idx = currentIndex();
+        dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
+        if (prevBtn) prevBtn.style.opacity = idx === 0 ? '0.35' : '1';
+        if (nextBtn) nextBtn.style.opacity = idx === slides.length - 1 ? '0.35' : '1';
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(currentIndex() - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(currentIndex() + 1); });
+      dots.forEach(function (d, i) { d.addEventListener('click', function () { goTo(i); }); });
+
+      var scrollTimer;
+      track.addEventListener('scroll', function () {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActive, 80);
+      }, { passive: true });
+      window.addEventListener('resize', function () { goTo(currentIndex()); });
+
+      var isDown = false, startX = 0, startScroll = 0, dragged = false;
+      track.addEventListener('mousedown', function (e) {
+        isDown = true; dragged = false;
+        startX = e.pageX; startScroll = track.scrollLeft;
+        track.classList.add('cvd-dragging');
+      });
+      window.addEventListener('mouseup', function () {
+        if (isDown) { isDown = false; track.classList.remove('cvd-dragging'); goTo(currentIndex()); }
+      });
+      window.addEventListener('mousemove', function (e) {
+        if (!isDown) return;
+        var dx = e.pageX - startX;
+        if (Math.abs(dx) > 4) dragged = true;
+        track.scrollLeft = startScroll - dx;
+      });
+      track.addEventListener('click', function (e) {
+        if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+      }, true);
+
+      updateActive();
+    });
+  }
+  initCarousels();
 })();
 </script>
 </body>
