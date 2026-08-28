@@ -32,7 +32,8 @@
   .cvd-carousel-track::-webkit-scrollbar { display: none; }
   .cvd-carousel-track.cvd-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
   .cvd-carousel-slide { flex: 0 0 100%; max-width: 100%; scroll-snap-align: start; scroll-snap-stop: always; }
-  .cvd-carousel-arrow { position: absolute; top: max(35vh, 230px); transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity 0.15s cubic-bezier(0.2,0,0.1,1), background 0.15s cubic-bezier(0.2,0,0.1,1); z-index: 3; backdrop-filter: blur(6px); padding: 0; }
+  .cvd-carousel-nav-sticky { position: sticky; top: 50vh; height: 0; z-index: 3; pointer-events: none; }
+  .cvd-carousel-arrow { position: absolute; top: -24px; width: 48px; height: 48px; border-radius: 50%; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity 0.15s cubic-bezier(0.2,0,0.1,1), background 0.15s cubic-bezier(0.2,0,0.1,1); backdrop-filter: blur(6px); padding: 0; pointer-events: auto; }
   .cvd-carousel-arrow:hover { background: rgba(0,0,0,0.75); }
   .cvd-carousel-arrow svg { width: 20px; height: 20px; fill: none; stroke: #ffffff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
   .cvd-carousel-prev { left: 20px; }
@@ -144,8 +145,10 @@
       </div>
       
           </div>
-          <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-          <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          <div class="cvd-carousel-nav-sticky">
+            <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          </div>
         </div>
         <div class="cvd-carousel-dots">
             <button class="cvd-carousel-dot" data-index="0" aria-label="Modelo 1"></button>
@@ -213,8 +216,10 @@
       </div>
       
           </div>
-          <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-          <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          <div class="cvd-carousel-nav-sticky">
+            <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          </div>
         </div>
         <div class="cvd-carousel-dots">
             <button class="cvd-carousel-dot" data-index="0" aria-label="Modelo 1"></button>
@@ -296,8 +301,10 @@
 
       
           </div>
-          <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-          <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          <div class="cvd-carousel-nav-sticky">
+            <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          </div>
         </div>
         <div class="cvd-carousel-dots">
             <button class="cvd-carousel-dot" data-index="0" aria-label="Modelo 1"></button>
@@ -416,8 +423,10 @@
         </div>
       </div>
           </div>
-          <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-          <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          <div class="cvd-carousel-nav-sticky">
+            <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          </div>
         </div>
         <div class="cvd-carousel-dots">
             <button class="cvd-carousel-dot" data-index="0" aria-label="Modelo 1"></button>
