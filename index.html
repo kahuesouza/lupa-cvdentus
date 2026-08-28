@@ -38,9 +38,10 @@
   .cvd-carousel-prev { left: 20px; }
   .cvd-carousel-next { right: 20px; }
   .cvd-carousel-dots { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 22px 0 0; }
-  .cvd-carousel-dot { height: 8px; width: 8px; padding: 0; border: none; border-radius: 999px; background: rgba(255,255,255,0.3); cursor: pointer; transition: width 0.25s cubic-bezier(0.2,0,0.1,1), background 0.25s cubic-bezier(0.2,0,0.1,1); }
-  .cvd-carousel-dot:hover { background: rgba(255,255,255,0.55); }
-  .cvd-carousel-dot.is-active { width: 22px; background: #ffffff; }
+  .cvd-carousel-dot { height: 8px; width: 22px; padding: 0; border: none; background: transparent; cursor: pointer; position: relative; }
+  .cvd-carousel-dot::after { content: ''; position: absolute; left: 0; top: 0; height: 8px; width: 8px; border-radius: 999px; background: rgba(255,255,255,0.3); transform: scaleX(1); transform-origin: left center; transition: transform 0.25s cubic-bezier(0.2,0,0.1,1), background 0.25s cubic-bezier(0.2,0,0.1,1); }
+  .cvd-carousel-dot:hover::after { background: rgba(255,255,255,0.55); }
+  .cvd-carousel-dot.is-active::after { transform: scaleX(2.75); background: #ffffff; }
   @media (max-width: 640px) { .cvd-carousel-arrow { width: 40px; height: 40px; } .cvd-carousel-arrow svg { width: 17px; height: 17px; } .cvd-carousel-prev { left: 12px; } .cvd-carousel-next { right: 12px; } }
 </style>
 </head>
