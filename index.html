@@ -31,8 +31,8 @@
   .cvd-carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; }
   .cvd-carousel-track::-webkit-scrollbar { display: none; }
   .cvd-carousel-track.cvd-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
-  .cvd-carousel-slide { flex: 0 0 100%; max-width: 100%; scroll-snap-align: start; scroll-snap-stop: always; opacity: 0; transition: opacity 1s cubic-bezier(0.2,0,0.1,1); }
-  .cvd-carousel-slide.is-active { opacity: 1; }
+  .cvd-carousel-slide { flex: 0 0 100%; max-width: 100%; scroll-snap-align: start; scroll-snap-stop: always; opacity: 0; filter: blur(18px); transform: translateX(60px) scale(1.04); transition: opacity 0.45s cubic-bezier(0.16,1,0.3,1), filter 0.45s cubic-bezier(0.16,1,0.3,1), transform 0.45s cubic-bezier(0.16,1,0.3,1); }
+  .cvd-carousel-slide.is-active { opacity: 1; filter: blur(0); transform: translateX(0) scale(1); }
   .cvd-letter { display: inline-block; white-space: pre; opacity: 0; }
   .cvd-carousel-slide.is-active .cvd-letter { animation: cvdLetterIn 0.5s cubic-bezier(0.2,0,0.1,1) forwards; animation-delay: var(--d, 0ms); }
   @keyframes cvdLetterIn { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
