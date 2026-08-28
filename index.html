@@ -38,6 +38,10 @@
   .cvd-carousel-slide.is-active .cvd-letter { animation: cvdLetterIn 0.5s cubic-bezier(0.2,0,0.1,1) forwards; animation-delay: var(--d, 0ms); }
   @keyframes cvdLetterIn { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
   .cvd-carousel-nav-sticky { position: sticky; top: 50vh; height: 0; z-index: 3; pointer-events: none; }
+  .cvd-carousel-name-sticky { position: sticky; top: 20px; height: 0; z-index: 4; display: flex; justify-content: center; pointer-events: none; }
+  .cvd-carousel-name-badge { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.18); backdrop-filter: blur(8px); border-radius: 999px; padding: 8px 22px; transition: opacity 0.2s cubic-bezier(0.2,0,0.1,1); }
+  .cvd-carousel-name-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); line-height: 1.3; }
+  .cvd-carousel-name-text { font-size: 15px; font-weight: 600; color: #ffffff; letter-spacing: -0.01em; line-height: 1.3; white-space: nowrap; }
   .cvd-carousel-arrow { position: absolute; top: -24px; width: 48px; height: 48px; border-radius: 50%; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity 0.15s cubic-bezier(0.2,0,0.1,1), background 0.15s cubic-bezier(0.2,0,0.1,1); backdrop-filter: blur(6px); padding: 0; pointer-events: auto; }
   .cvd-carousel-arrow:hover { background: rgba(0,0,0,0.75); }
   .cvd-carousel-arrow svg { width: 20px; height: 20px; fill: none; stroke: #ffffff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
@@ -96,6 +100,12 @@
 
       <div class="cvd-carousel" style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
         <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw);">
+          <div class="cvd-carousel-name-sticky">
+            <div class="cvd-carousel-name-badge">
+              <span class="cvd-carousel-name-label"></span>
+              <span class="cvd-carousel-name-text"></span>
+            </div>
+          </div>
           <div class="cvd-carousel-nav-sticky">
             <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
             <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
@@ -170,6 +180,12 @@
 
       <div class="cvd-carousel" style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
         <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw);">
+          <div class="cvd-carousel-name-sticky">
+            <div class="cvd-carousel-name-badge">
+              <span class="cvd-carousel-name-label"></span>
+              <span class="cvd-carousel-name-text"></span>
+            </div>
+          </div>
           <div class="cvd-carousel-nav-sticky">
             <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
             <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
@@ -244,6 +260,12 @@
 
       <div class="cvd-carousel" style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
         <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw);">
+          <div class="cvd-carousel-name-sticky">
+            <div class="cvd-carousel-name-badge">
+              <span class="cvd-carousel-name-label"></span>
+              <span class="cvd-carousel-name-text"></span>
+            </div>
+          </div>
           <div class="cvd-carousel-nav-sticky">
             <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
             <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
@@ -330,6 +352,12 @@
 
       <div class="cvd-carousel" style="padding: 56px 0 0; border-top: 1px solid rgba(255,255,255,0.08); position: relative; z-index: 1;">
         <div style="position: relative; width: 100vw; margin-left: calc(50% - 50vw);">
+          <div class="cvd-carousel-name-sticky">
+            <div class="cvd-carousel-name-badge">
+              <span class="cvd-carousel-name-label"></span>
+              <span class="cvd-carousel-name-text"></span>
+            </div>
+          </div>
           <div class="cvd-carousel-nav-sticky">
             <button class="cvd-carousel-arrow cvd-carousel-prev" aria-label="Modelo anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
             <button class="cvd-carousel-arrow cvd-carousel-next" aria-label="Próximo modelo"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
@@ -496,6 +524,8 @@
       var dots = Array.prototype.slice.call(carousel.querySelectorAll('.cvd-carousel-dot'));
       var prevBtn = carousel.querySelector('.cvd-carousel-prev');
       var nextBtn = carousel.querySelector('.cvd-carousel-next');
+      var nameLabelEl = carousel.querySelector('.cvd-carousel-name-label');
+      var nameTextEl = carousel.querySelector('.cvd-carousel-name-text');
 
       if (slides.length <= 1) {
         if (prevBtn) prevBtn.style.display = 'none';
@@ -545,6 +575,15 @@
           incoming.classList.remove('cvd-speed-in');
           void incoming.offsetWidth;
           incoming.classList.add('cvd-speed-in');
+          if (nameTextEl) {
+            var heading = incoming.querySelector('h3');
+            nameTextEl.textContent = heading ? heading.textContent : '';
+            var labelSpan = heading && heading.previousElementSibling && heading.previousElementSibling.tagName === 'SPAN' ? heading.previousElementSibling : null;
+            if (nameLabelEl) {
+              nameLabelEl.textContent = labelSpan ? labelSpan.textContent : '';
+              nameLabelEl.style.display = labelSpan ? '' : 'none';
+            }
+          }
         }
       }
 
