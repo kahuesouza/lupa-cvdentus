@@ -31,8 +31,9 @@
   .cvd-carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; }
   .cvd-carousel-track::-webkit-scrollbar { display: none; }
   .cvd-carousel-track.cvd-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
-  .cvd-carousel-slide { flex: 0 0 100%; max-width: 100%; scroll-snap-align: start; scroll-snap-stop: always; opacity: 0; filter: blur(18px); transform: translateX(60px) scale(1.04); transition: opacity 0.45s cubic-bezier(0.16,1,0.3,1), filter 0.45s cubic-bezier(0.16,1,0.3,1), transform 0.45s cubic-bezier(0.16,1,0.3,1); }
-  .cvd-carousel-slide.is-active { opacity: 1; filter: blur(0); transform: translateX(0) scale(1); }
+  .cvd-carousel-slide { flex: 0 0 100%; max-width: 100%; scroll-snap-align: start; scroll-snap-stop: always; opacity: 1; filter: blur(0); transform: none; }
+  .cvd-carousel-slide.cvd-speed-in { animation: cvdSpeedIn 0.5s cubic-bezier(0.16,1,0.3,1); }
+  @keyframes cvdSpeedIn { 0% { opacity: 0; filter: blur(18px); transform: translateX(60px) scale(1.04); } 100% { opacity: 1; filter: blur(0); transform: translateX(0) scale(1); } }
   .cvd-letter { display: inline-block; white-space: pre; opacity: 0; }
   .cvd-carousel-slide.is-active .cvd-letter { animation: cvdLetterIn 0.5s cubic-bezier(0.2,0,0.1,1) forwards; animation-delay: var(--d, 0ms); }
   @keyframes cvdLetterIn { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
@@ -523,18 +524,28 @@
 
       function currentIndex() {
         var w = track.clientWidth || 1;
-        return Math.round(track.scrollLeft / w);
+        var idx = Math.round(track.scrollLeft / w);
+        if (!isFinite(idx)) idx = 0;
+        return Math.max(0, Math.min(slides.length - 1, idx));
       }
       function goTo(i) {
         i = Math.max(0, Math.min(slides.length - 1, i));
         track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
       }
+      var lastActiveIndex = -1;
       function updateActive() {
         var idx = currentIndex();
         slides.forEach(function (s, i) { s.classList.toggle('is-active', i === idx); });
         dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
         if (prevBtn) prevBtn.style.opacity = idx === 0 ? '0.35' : '1';
         if (nextBtn) nextBtn.style.opacity = idx === slides.length - 1 ? '0.35' : '1';
+        if (idx !== lastActiveIndex) {
+          lastActiveIndex = idx;
+          var incoming = slides[idx];
+          incoming.classList.remove('cvd-speed-in');
+          void incoming.offsetWidth;
+          incoming.classList.add('cvd-speed-in');
+        }
       }
 
       if (prevBtn) prevBtn.addEventListener('click', function () { goTo(currentIndex() - 1); });
