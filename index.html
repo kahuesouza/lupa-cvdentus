@@ -54,6 +54,12 @@
   .cvd-carousel-dot.is-active::after { transform: scaleX(2.75); background: #ffffff; }
   @media (max-width: 640px) { .cvd-carousel-arrow { width: 40px; height: 40px; } .cvd-carousel-arrow svg { width: 17px; height: 17px; } .cvd-carousel-prev { left: 12px; } .cvd-carousel-next { right: 12px; } }
 </style>
+<style>
+.cvd-lang{display:inline-flex;align-items:center;padding:14px 26px;border-radius:999px;border:0;cursor:pointer;background:#2E7DB9;color:#ffffff;font:600 16px Inter,sans-serif;transition:transform .15s ease,background .2s ease}
+.cvd-lang:hover{transform:translateY(-1px)}
+.cvd-lang[aria-pressed="true"]{background:#ffffff;color:#000000;box-shadow:0 0 0 2px #2E7DB9}
+.cvd-lang:focus-visible{outline:3px solid #ffffff;outline-offset:3px}
+</style>
 </head>
 <body>
 
@@ -88,9 +94,9 @@
       <div class="cvd-idiomas" style="margin: 0 0 36px; opacity: 0; animation: cvdFadeUp 0.8s cubic-bezier(0.2,0,0.1,1) 0.3s forwards;">
         <div style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin: 0 0 14px;">Escolha o idioma · Choose your language · Elija su idioma</div>
         <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-          <span style="display: inline-flex; align-items: center; padding: 14px 26px; border-radius: 999px; background: #ffffff; color: #000000; font-size: 16px; font-weight: 600; box-shadow: 0 0 0 2px #2E7DB9;">Português</span>
-          <a href="https://cloud.cvdentus.com.br/arquivos/catalogos/catalogo-lupas-cvdentus-2026-en.pdf" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 14px 26px; border-radius: 999px; background: #2E7DB9; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600;">English · PDF</a>
-          <a href="https://cloud.cvdentus.com.br/arquivos/catalogos/catalogo-lupas-cvdentus-2026-es.pdf" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; padding: 14px 26px; border-radius: 999px; background: #2E7DB9; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600;">Español · PDF</a>
+          <button type="button" class="cvd-lang" data-lang="pt" aria-pressed="true">Português</button>
+          <button type="button" class="cvd-lang" data-lang="en" aria-pressed="false">English</button>
+          <button type="button" class="cvd-lang" data-lang="es" aria-pressed="false">Español</button>
         </div>
       </div>
       <nav style="display: flex; flex-wrap: wrap; gap: 12px;">
@@ -648,6 +654,76 @@
   document.querySelectorAll('.cvd-lazy-video').forEach(function (v) {
     lazyVideoObserver.observe(v);
   });
+})();
+</script>
+<script>
+(function(){
+  var DICT = {"Catálogo de Lupas CVDentus": {"en": "Loupe Catalog CVDentus", "es": "Catálogo de Lupas CVDentus"}, "Catálogo de Lupas": {"en": "Loupe Catalog", "es": "Catálogo de Lupas"}, "Português": {"en": "Português", "es": "Português"}, "Modelos Flip": {"en": "Flip Models", "es": "Modelos Flip"}, "Modelos TTL": {"en": "TTL Models", "es": "Modelos TTL"}, "Fotóforos": {"en": "LED Photophores", "es": "Fotóforos LED"}, "Armações Disponíveis": {"en": "Available Frames", "es": "Armazones disponibles"}, "Modelo anterior": {"en": "Previous model", "es": "Modelo anterior"}, "Próximo modelo": {"en": "Next model", "es": "Siguiente modelo"}, "Flip Up": {"en": "Flip-Up", "es": "Flip-Up"}, "Ergo": {"en": "Ergo", "es": "Ergo"}, "Lupa binocular flip-up com armação clip-on universal. Oculares em prisma com ajuste independente de distância interpupilar (escala graduada em cada lado) e mecanismo de báscula para liberar o campo de visão sem remover a armação.": {"en": "Flip-up binocular loupe with universal clip-on frame. Prism eyepieces with independent interpupillary distance adjustment (graduated scale on each side) and tilt mechanism to clear the field of view without removing the frame.", "es": "Lupa binocular flip-up con armazón clip-on universal. Oculares prismáticos con ajuste independiente de distancia interpupilar (escala graduada a cada lado) y mecanismo de basculación para liberar el campo de visión sin quitar el armazón."}, "Kepler": {"en": "Kepler", "es": "Kepler"}, "Lupa binocular flip-up sobre armação em titânio de haste dupla, com fixação central por clipe e trilho graduado independente para cada olho. Oculares cilíndricos em ângulo, otimizados para foco de precisão em procedimentos prolongados.": {"en": "Flip-up binocular loupe on a double-bar titanium frame, with central clip fixation and an independent graduated track for each eye. Angled cylindrical eyepieces, optimized for precision focus in long procedures.", "es": "Lupa binocular flip-up sobre armazón de titanio de doble varilla, con fijación central por clip y riel graduado independiente para cada ojo. Oculares cilíndricos angulados, optimizados para el enfoque de precisión en procedimientos prolongados."}, "Galileu": {"en": "Galileu", "es": "Galileu"}, "Lupa binocular flip-up com corpo compacto e oculares de maior diâmetro, fixação central sobre a armação e trilho lateral para ajuste independente da distância interpupilar. Indicada para maior campo de visão em procedimentos de rotina.": {"en": "Flip-up binocular loupe with compact body and larger-diameter eyepieces, central fixation on the frame and lateral track for independent interpupillary distance adjustment. Indicated for a wider field of view in routine procedures.", "es": "Lupa binocular flip-up de cuerpo compacto y oculares de mayor diámetro, fijación central sobre el armazón y riel lateral para ajuste independiente de la distancia interpupilar. Indicada para un mayor campo de visión en procedimientos de rutina."}, "Modelo 1": {"en": "Model 1", "es": "Modelo 1"}, "Modelo 2": {"en": "Model 2", "es": "Modelo 2"}, "Modelo 3": {"en": "Model 3", "es": "Modelo 3"}, "TTL": {"en": "TTL", "es": "TTL"}, "Lupa TTL (through-the-lens) com oculares embutidos diretamente na armação, alinhados ao eixo visual do usuário. Estrutura rígida e compacta, sem articulação de báscula, para máxima estabilidade óptica.": {"en": "TTL (through-the-lens) loupe with eyepieces built directly into the frame, aligned to the user's visual axis. Rigid, compact structure with no tilt articulation, for maximum optical stability.", "es": "Lupa TTL (through-the-lens) con oculares integrados directamente en el armazón, alineados al eje visual del usuario. Estructura rígida y compacta, sin articulación de basculación, para máxima estabilidad óptica."}, "Lupa TTL com oculares embutidos na armação em ângulo fixo, corpo cilíndrico revestido e escala de distância interpupilar gravada na haste. Estrutura enxuta, sem báscula, para uso contínuo de longa duração.": {"en": "TTL loupe with eyepieces built into the frame at a fixed angle, coated cylindrical body and interpupillary distance scale engraved on the temple. Slim structure with no tilt mechanism, for long continuous use.", "es": "Lupa TTL con oculares integrados en el armazón en ángulo fijo, cuerpo cilíndrico revestido y escala de distancia interpupilar grabada en la varilla. Estructura ligera, sin basculación, para uso continuo prolongado."}, "Lupa TTL com oculares em anel embutidos diretamente na armação, corpo curto e compacto para menor peso frontal. Escala de distância interpupilar gravada na haste, sem articulação de báscula.": {"en": "TTL loupe with ring eyepieces built directly into the frame, short compact body for lower front weight. Interpupillary distance scale engraved on the temple, no tilt articulation.", "es": "Lupa TTL con oculares en anillo integrados directamente en el armazón, cuerpo corto y compacto para menor peso frontal. Escala de distancia interpupilar grabada en la varilla, sin articulación de basculación."}, "JC-M06-B · Kit Starter": {"en": "JC-M06-B · Starter Kit", "es": "JC-M06-B · Kit inicial"}, "Fotóforo LED de entrada para quem está começando a incorporar iluminação frontal de precisão à rotina clínica. Intensidade de 30.000 lux com bateria portátil de até 4 horas de autonomia contínua por carga.": {"en": "Entry-level LED photophore for those starting to add precision front lighting to clinical routine. 30,000 lux intensity with a portable battery offering up to 4 hours of continuous use per charge.", "es": "Fotóforo LED de entrada para quienes están empezando a incorporar iluminación frontal de precisión a la rutina clínica. Intensidad de 30.000 lux con batería portátil de hasta 4 horas de autonomía continua por carga."}, "JC-M06-B Kit Starter": {"en": "JC-M06-B Starter Kit", "es": "JC-M06-B Kit inicial"}, "JC-M06-C · Kit Intermediário": {"en": "JC-M06-C · Intermediate Kit", "es": "JC-M06-C · Kit intermedio"}, "Fotóforo LED com bateria de maior capacidade, pensado para jornadas clínicas mais longas sem interrupção para recarga. Intensidade de 30.000 lumens com autonomia de até 12 horas de uso contínuo por carga.": {"en": "LED photophore with a larger-capacity battery, designed for longer clinical sessions without stopping to recharge. 30,000 lumens intensity with up to 12 hours of continuous use per charge.", "es": "Fotóforo LED con batería de mayor capacidad, pensado para jornadas clínicas más largas sin interrupción para recargar. Intensidad de 30.000 lúmenes con autonomía de hasta 12 horas de uso continuo por carga."}, "JC-M06-C Kit Intermediário": {"en": "JC-M06-C Intermediate Kit", "es": "JC-M06-C Kit intermedio"}, "JG-M06C": {"en": "JG-M06C", "es": "JG-M06C"}, "Fotóforo LED acoplado a bateria de pescoço, unindo mobilidade e conforto ao longo de todo o expediente clínico. Intensidade de 30.000 lumens com controle de 5 níveis de intensidade e autonomia de 4 a 6 horas por carga.": {"en": "LED photophore attached to a neck-band battery, combining mobility and comfort throughout the clinical day. 30,000 lumens with 5 intensity levels and 4 to 6 hours of battery life per charge.", "es": "Fotóforo LED acoplado a batería de cuello, que combina movilidad y comodidad durante toda la jornada clínica. Intensidad de 30.000 lúmenes con control de 5 niveles y autonomía de 4 a 6 horas por carga."}, "JG-M07C": {"en": "JG-M07C", "es": "JG-M07C"}, "Fotóforo LED de alta potência acoplado a bateria de pescoço, indicado para procedimentos que exigem máxima precisão visual em campo escurecido. Intensidade de até 85.000 lux com controle de 5 níveis de intensidade e autonomia de 4 a 6 horas por carga.": {"en": "High-power LED photophore attached to a neck-band battery, for procedures that demand maximum visual precision in a darkened field. Intensity up to 85,000 lux with 5 intensity levels and 4 to 6 hours of battery life per charge.", "es": "Fotóforo LED de alta potencia acoplado a batería de cuello, indicado para procedimientos que exigen máxima precisión visual en campo oscurecido. Intensidad de hasta 85.000 lux con control de 5 niveles y autonomía de 4 a 6 horas por carga."}, "Modelo 4": {"en": "Model 4", "es": "Modelo 4"}, "Armações": {"en": "Frames", "es": "Armazones"}, "J04 Black": {"en": "J04 Black", "es": "J04 Black"}, "Armação em acetato fosco preto, haste reta com acabamento em metal escovado e ponte reforçada. Estrutura compatível com fixação de lupas clip-on e TTL.": {"en": "Matte black acetate frame, straight temples with brushed metal finish and reinforced bridge. Structure compatible with clip-on and TTL loupes.", "es": "Armazón de acetato negro mate, varillas rectas con acabado en metal cepillado y puente reforzado. Estructura compatible con lupas clip-on y TTL."}, "J04 Silver": {"en": "J04 Silver", "es": "J04 Silver"}, "Armação em acetato preto com hastes em metal acabamento prata escovado e ponte reforçada. Estrutura compatível com fixação de lupas clip-on e TTL.": {"en": "Black acetate frame with brushed silver metal temples and reinforced bridge. Structure compatible with clip-on and TTL loupes.", "es": "Armazón de acetato negro con varillas de metal con acabado plateado cepillado y puente reforzado. Estructura compatible con lupas clip-on y TTL."}, "J22": {"en": "J22", "es": "J22"}, "Armação em metal acabamento grafite escovado, ponte reforçada com fixação central e hastes finas retas. Estrutura compatível com fixação de lupas clip-on e TTL.": {"en": "Brushed graphite metal frame, reinforced bridge with central fixation and thin straight temples. Structure compatible with clip-on and TTL loupes.", "es": "Armazón de metal con acabado grafito cepillado, puente reforzado con fijación central y varillas finas rectas. Estructura compatible con lupas clip-on y TTL."}, "J23": {"en": "J23", "es": "J23"}, "Armação em metal preto fosco com formato arredondado, ponte reforçada com fixação central e hastes retas em acabamento fosco. Estrutura compatível com fixação de lupas clip-on e TTL.": {"en": "Round-shaped matte black metal frame, reinforced bridge with central fixation and straight matte temples. Structure compatible with clip-on and TTL loupes.", "es": "Armazón de metal negro mate de forma redonda, puente reforzado con fijación central y varillas rectas de acabado mate. Estructura compatible con lupas clip-on y TTL."}, "J24 Black": {"en": "J24 Black", "es": "J24 Black"}, "Armação clubmaster em metal preto fosco com hastes em prata escovado, ponte reforçada com fixação central. Estrutura compatível com fixação de lupas clip-on e TTL.": {"en": "Clubmaster-style matte black metal frame with brushed silver temples, reinforced bridge with central fixation. Structure compatible with clip-on and TTL loupes.", "es": "Armazón estilo clubmaster de metal negro mate con varillas en plata cepillada, puente reforzado con fijación central. Estructura compatible con lupas clip-on y TTL."}, "J24 Silver": {"en": "J24 Silver", "es": "J24 Silver"}, "Armação clubmaster em acetato azul fosco com hastes em prata escovado, ponte reforçada com fixação central. Estrutura compatível com fixação de lupas clip-on e TTL.": {"en": "Clubmaster-style matte blue acetate frame with brushed silver temples, reinforced bridge with central fixation. Structure compatible with clip-on and TTL loupes.", "es": "Armazón estilo clubmaster de acetato azul mate con varillas en plata cepillada, puente reforzado con fijación central. Estructura compatible con lupas clip-on y TTL."}, "Modelo 5": {"en": "Model 5", "es": "Modelo 5"}, "Modelo 6": {"en": "Model 6", "es": "Modelo 6"}};
+  var TITULO = {pt:'Catálogo de Lupas CVDentus', en:'Loupe Catalog CVDentus', es:'Catálogo de Lupas CVDentus'};
+  var HTML_LANG = {pt:'pt-BR', en:'en', es:'es'};
+  var ATRIBUTOS = ['alt','aria-label','title'];
+  var originais = new Map();
+  function ler(){ try{ return localStorage.getItem('cvd_lang_catalogo'); }catch(e){ return null; } }
+  function gravar(v){ try{ localStorage.setItem('cvd_lang_catalogo', v); }catch(e){} }
+  function aplicar(lang){
+    /* títulos quebrados em vários nós (animação do carrossel): traduz o elemento inteiro */
+    document.querySelectorAll('h1,h2,h3,h4,p,span,a,button,div,label,small,strong').forEach(function(el){
+      if(el._cvdPT === undefined){
+        if(el.childElementCount === 0) return;
+        var t0 = el.textContent; if(!DICT[t0.trim()]) return;
+        el._cvdPT = t0;
+      }
+      var k = el._cvdPT.trim(); if(!DICT[k]) return;
+      var novo = lang === 'pt' ? el._cvdPT : el._cvdPT.replace(k, DICT[k][lang]);
+      if(el.textContent !== novo) el.textContent = novo;
+    });
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+    var no;
+    while((no = walker.nextNode())){
+      var pai = no.parentNode && no.parentNode.nodeName;
+      if(pai === 'SCRIPT' || pai === 'STYLE') continue;
+      if(!originais.has(no)) originais.set(no, no.nodeValue);
+      var orig = originais.get(no), k = orig.trim();
+      if(DICT[k]){
+        no.nodeValue = lang === 'pt' ? orig : orig.replace(k, DICT[k][lang]);
+      }
+    }
+    document.querySelectorAll('[alt],[aria-label],[title]').forEach(function(el){
+      ATRIBUTOS.forEach(function(a){
+        if(!el.hasAttribute(a)) return;
+        var key = el.getAttribute(a) + '|' + a;
+        if(!originais.has(el)) originais.set(el, {});
+        var reg = originais.get(el);
+        if(!(a in reg)) reg[a] = el.getAttribute(a);
+        var orig = reg[a], k = orig.trim();
+        el.setAttribute(a, (lang === 'pt' || !DICT[k]) ? orig : DICT[k][lang]);
+      });
+    });
+    document.title = TITULO[lang];
+    document.documentElement.lang = HTML_LANG[lang];
+    document.querySelectorAll('.cvd-lang').forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+    });
+  }
+  var params = new URLSearchParams(location.search);
+  var inicial = params.get('lang') || ler() || 'pt';
+  if(!HTML_LANG[inicial]) inicial = 'pt';
+  document.querySelectorAll('.cvd-lang').forEach(function(b){
+    b.addEventListener('click', function(){
+      var lang = b.dataset.lang;
+      gravar(lang);
+      atual = lang;
+      aplicar(lang);
+    });
+  });
+  var atual = inicial;
+  var pendente = false;
+  aplicar(inicial);
+  /* o carrossel cria cópias dos slides depois do carregamento: reaplica o idioma nelas */
+  new MutationObserver(function(){
+    if(pendente) return; pendente = true;
+    requestAnimationFrame(function(){ pendente = false; aplicar(atual); });
+  }).observe(document.body, {childList: true, subtree: true});
 })();
 </script>
 </body>
